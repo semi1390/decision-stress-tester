@@ -5,6 +5,7 @@ import { lookupTicker, suggestTicker } from "@/lib/providers/fallback";
 // Provider needs the Node.js runtime.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60; // analysis can take ~20s; Vercel default can be too low
 
 export async function GET(req: NextRequest) {
   const symbol = (req.nextUrl.searchParams.get("symbol") || "").trim().toUpperCase();

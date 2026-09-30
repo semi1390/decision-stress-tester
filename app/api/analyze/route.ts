@@ -5,6 +5,7 @@ import { toErrorPayload } from "@/lib/analysis/errors";
 // Qwen client + MCP SDK need the Node.js runtime (not Edge).
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60; // analysis can take ~20s; Vercel default can be too low
 
 export async function POST(req: NextRequest) {
   let idea = "";

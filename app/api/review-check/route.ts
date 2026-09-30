@@ -4,6 +4,7 @@ import { createDataProvider } from "@/lib/providers";
 // Provider needs the Node.js runtime.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60; // analysis can take ~20s; Vercel default can be too low
 
 /** Cheap signals for the portfolio review check: current price + latest filing date. */
 export async function GET(req: NextRequest) {
