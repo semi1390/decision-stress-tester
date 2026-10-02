@@ -82,7 +82,7 @@ export default function ReviewPage() {
   function updateThesis() { if (!fresh || !decision) return; const tid = newId("thesis"); thesesStore.upsert(buildThesisFromResult(fresh, decision, tid)); portfolioStore.upsert({ ...pos!, linkedThesisId: tid }); setDone(tid); }
 
   return (
-    <main className="mx-auto max-w-[1180px] px-6 pb-16 pt-8">
+    <main className="mx-auto max-w-[1180px] px-4 pb-16 pt-8 sm:px-6">
       <div className="flex items-center justify-between gap-3">
         <Link href="/portfolio" className="inline-flex items-center gap-1.5 text-sm text-[var(--text-dim)] transition hover:text-[var(--text)]"><span aria-hidden>‹</span> Portfolio</Link>
         <span className="text-xs text-[var(--text-mute)]">Reviewing your saved thesis against a fresh analysis</span>
@@ -92,7 +92,7 @@ export default function ReviewPage() {
       <div className="animate-in mt-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
         <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
           <div className="flex items-center gap-3.5"><span className="mono grid h-11 w-11 place-items-center rounded-xl bg-[var(--surface-2)] text-sm font-medium text-[var(--text-dim)]">{pos.ticker.slice(0, 2)}</span><div><div className="flex items-center gap-2"><span className="text-lg font-semibold tracking-tight">{pos.ticker}</span><span className={`inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] font-medium ring-1 ring-inset ${d.cls}`}><span aria-hidden>{d.arrow}</span>{d.label}</span></div><div className="text-xs text-[var(--text-dim)]">{thesis.companyName ?? pos.ticker}</div></div></div>
-          <div className="ml-auto flex flex-wrap items-center gap-8">
+          <div className="ml-auto flex flex-wrap items-center gap-6 sm:gap-8">
             <div><div className="text-[11px] uppercase tracking-wide text-[var(--text-mute)]">Size @ entry</div><div className="mono mt-0.5 text-sm text-[var(--text)]">{pos.size} @ ${fmt(pos.entryPrice)}</div></div>
             <div><div className="text-[11px] uppercase tracking-wide text-[var(--text-mute)]">Current</div><div className="mono mt-0.5 text-sm text-[var(--text)]">{nowPrice != null ? `$${fmt(nowPrice)}` : "—"}</div></div>
             <div><div className="text-[11px] uppercase tracking-wide text-[var(--text-mute)]">P&L</div><div className={`mono mt-0.5 text-sm font-medium ${(abs ?? 0) >= 0 ? "text-emerald-300" : "text-red-300"}`}>{money(abs)} · {pctf(pct)}</div></div>

@@ -29,16 +29,16 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="mx-auto max-w-[1240px] px-6 py-8">
+    <main className="mx-auto max-w-[1240px] px-4 py-6 sm:px-6 sm:py-8">
       {/* hero + snapshot */}
       <div className="grid gap-4 lg:grid-cols-[1fr_340px]">
         {/* hero card */}
-        <div className="animate-in rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8">
+        <div className="animate-in rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8">
           <div className="grid gap-8 md:grid-cols-[1fr_290px]">
             <div className="flex flex-col justify-between">
               <div>
                 <p className="text-sm text-[var(--text-dim)]">{name ? `Welcome back, ${name}.` : "Welcome to Reckon."}</p>
-                <h1 className="mt-3 text-4xl font-semibold leading-[1.06] tracking-tight text-[var(--text)] sm:text-[42px]">
+                <h1 className="mt-3 text-3xl font-semibold leading-[1.08] tracking-tight text-[var(--text)] sm:text-[42px]">
                   Challenge the trade<br />before you place it.
                 </h1>
                 <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[var(--text-dim)]">

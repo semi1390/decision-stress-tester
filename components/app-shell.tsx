@@ -14,7 +14,7 @@ const NAV = [
   { href: "/", label: "Home", icon: "M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10" },
   { href: "/discover", label: "Discover", icon: "M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM21 21l-4-4" },
   { href: "/research", label: "Research", icon: "M4 18l5-6 4 3 6-8M3 21h18" },
-  { href: "/theses", label: "My Theses", icon: "M6 3h9l3 3v15l-6-3-6 3V3zM9 8h6M9 12h6" },
+  { href: "/theses", label: "My Theses", short: "Theses", icon: "M6 3h9l3 3v15l-6-3-6 3V3zM9 8h6M9 12h6" },
   { href: "/portfolio", label: "Portfolio", icon: "M3 7h18v13H3zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" },
   { href: "/history", label: "History", icon: "M12 8v4l3 2M3.05 11a9 9 0 1 1 .5 4M3 4v4h4" },
 ];
@@ -96,17 +96,18 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--bg)]/85 backdrop-blur-md">
-        <div className="mx-auto max-w-[1240px] px-6">
+        <div className="mx-auto max-w-[1240px] px-4 md:px-6">
           {/* row 1: brand · search · actions */}
           <div className="flex h-16 items-center gap-4">
             <Brand />
-            <div className="relative hidden max-w-[340px] flex-1 items-center sm:flex">
+            <div className="relative hidden max-w-[340px] flex-1 items-center md:flex">
               <svg viewBox="0 0 24 24" className="pointer-events-none absolute left-3 h-4 w-4 text-[var(--text-mute)]" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" strokeLinecap="round" /></svg>
               <input ref={searchRef} value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={(e) => e.key === "Enter" && runSearch()} placeholder="Search a ticker" className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] py-2 pl-9 pr-9 text-sm text-[var(--text)] outline-none transition-colors focus:border-[var(--border-2)] placeholder:text-[var(--text-mute)]" />
               <kbd className="mono pointer-events-none absolute right-2.5 rounded border border-[var(--border-2)] bg-[var(--surface-2)] px-1.5 py-0.5 text-[10px] text-[var(--text-mute)]">/</kbd>
             </div>
 
             <div className="ml-auto flex items-center gap-2.5">
+              <Link href="/discover" aria-label="Search" className="grid h-9 w-9 place-items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] text-[var(--text-mute)] transition hover:text-[var(--text)] md:hidden"><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" strokeLinecap="round" /></svg></Link>
               <span className="hidden items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs text-[var(--text-dim)] md:inline-flex">
                 <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />Powered by <span className="font-semibold text-[var(--text)]">Qwen</span>
               </span>
@@ -140,7 +141,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* row 2: nav · status chip */}
-          <div className="flex h-11 items-center gap-1 overflow-x-auto">
+          <div className="hidden h-11 items-center gap-1 overflow-x-auto md:flex">
             {NAV.map((it) => {
               const active = isActive(it.href);
               return (
@@ -155,7 +156,20 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      {children}
+      <div className="pb-[72px] md:pb-0">{children}</div>
+
+      {/* mobile bottom tab bar */}
+      <nav className="fixed inset-x-0 bottom-0 z-40 flex border-t border-[var(--border)] bg-[var(--bg)]/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden">
+        {NAV.map((it) => {
+          const active = isActive(it.href);
+          return (
+            <Link key={it.href} href={it.href} className={`flex flex-1 flex-col items-center gap-0.5 py-2 text-[10px] font-medium transition ${active ? "text-[var(--text)]" : "text-[var(--text-mute)]"}`}>
+              <span className={active ? "text-indigo-300" : ""}><I d={it.icon} /></span>
+              {(it as { short?: string }).short ?? it.label}
+            </Link>
+          );
+        })}
+      </nav>
 
       <ProfileGate onSaved={setProfile} />
 

@@ -38,7 +38,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <main className="mx-auto max-w-[720px] px-6 py-10 md:py-12">
+    <main className="mx-auto max-w-[720px] px-4 py-8 sm:px-6 md:py-12">
       <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Settings</h1>
       <p className="mt-2 text-sm text-[var(--text-dim)]">Your profile and data live only on this device.</p>
 

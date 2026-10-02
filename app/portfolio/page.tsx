@@ -46,7 +46,7 @@ export default function PortfolioPage() {
   const needsReviewCount = positions.filter((p) => p.linkedThesisId && live[p.ticker] && computeReviewSignals(p, theses[p.linkedThesisId!] ?? null, live[p.ticker].price, live[p.ticker].latestFilingDate).length > 0).length;
 
   return (
-    <main className="mx-auto max-w-[1080px] px-6 py-8">
+    <main className="mx-auto max-w-[1080px] px-4 py-6 sm:px-6 sm:py-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Portfolio</h1>
@@ -59,7 +59,7 @@ export default function PortfolioPage() {
         <EmptyState icon={<svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7h18v13H3zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>} title="No positions yet" body="Commit a Trade decision on a thesis and add it here, or add a position manually to track P&L and review alerts." ctaHref="/theses" ctaLabel="Go to My Theses" />
       ) : (
         <>
-          <div className="mt-6 grid grid-cols-3 gap-3">
+          <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-3">
             <Tile label="Open positions" value={String(positions.length)} />
             <Tile label="Total P&amp;L" value={money(totalPnl)} tone={totalPnl >= 0 ? "up" : "down"} sub="paper" mono />
             <Tile label="Return" value={pctf(totalPct)} tone={(totalPct ?? 0) >= 0 ? "up" : "down"} sub={`on $${totalCost.toLocaleString(undefined, { maximumFractionDigits: 0 })} at entry`} mono />
@@ -80,7 +80,7 @@ export default function PortfolioPage() {
               const sd = dir[p.side === "short" ? "short" : "long"];
               return (
                 <div key={p.id} className={`overflow-hidden rounded-2xl border bg-[var(--surface)] ${needsReview ? "border-amber-400/35" : "border-[var(--border)]"}`}>
-                  <div className="flex flex-wrap items-center gap-x-6 gap-y-3 p-4">
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5 p-4">
                     <div className="flex items-center gap-3">
                       <span className="mono grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--surface-2)] text-xs font-medium text-[var(--text-dim)]">{p.ticker.slice(0, 2)}</span>
                       <div><div className="flex items-center gap-1.5"><span className="text-sm font-semibold text-[var(--text)]">{p.ticker}</span><span className={`mono rounded px-1 py-0.5 text-[10px] font-medium ${sd.cls}`}>{sd.label}</span></div></div>
@@ -88,13 +88,13 @@ export default function PortfolioPage() {
                     <Col label="Size @ entry" value={`${p.size} @ $${fmt(p.entryPrice)}`} />
                     <Col label="Current" value={l?.price != null ? `$${fmt(l.price)}` : "—"} />
                     <Col label="P&L" value={<span className={`${(abs ?? 0) >= 0 ? "text-emerald-300" : "text-red-300"}`}>{money(abs)} <span className="text-xs opacity-80">{pctf(pct)}</span></span>} />
-                    <div className="min-w-[180px] flex-1">
+                    <div className="w-full md:w-auto md:min-w-[180px] md:flex-1">
                       <div className="text-[11px] text-[var(--text-mute)]">Linked thesis</div>
                       {thesis ? (
                         <Link href={`/theses/${thesis.id}`} className="group mt-0.5 flex items-center gap-2"><span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold ${OPT_COLOR[thesis.decision]}`}><span className={`h-1.5 w-1.5 rounded-full ${OPT_DOT[thesis.decision]}`} />{thesis.decision}</span><span className="truncate text-xs text-[var(--text-dim)] group-hover:text-[var(--text)]">{thesis.thesis}</span></Link>
                       ) : <div className="mt-0.5 text-xs text-[var(--text-mute)]">No linked thesis</div>}
                     </div>
-                    <button onClick={() => close(p.id)} className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] px-3.5 py-1.5 text-sm text-[var(--text-dim)] transition hover:border-red-400/40 hover:text-red-300">Close</button>
+                    <button onClick={() => close(p.id)} className="ml-auto rounded-lg border border-[var(--border)] bg-[var(--surface-2)] px-3.5 py-1.5 text-sm text-[var(--text-dim)] transition hover:border-red-400/40 hover:text-red-300">Close</button>
                   </div>
 
                   {needsReview && (
@@ -122,7 +122,7 @@ export default function PortfolioPage() {
 
 function Tile({ label, value, tone, sub, mono }: { label: string; value: string; tone?: "up" | "down"; sub?: string; mono?: boolean }) {
   const c = tone === "up" ? "text-emerald-300" : tone === "down" ? "text-red-300" : "text-[var(--text)]";
-  return <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4"><div className="text-xs text-[var(--text-mute)]">{label}</div><div className={`mt-1 text-2xl font-semibold ${c} ${mono ? "mono tnum" : ""}`}>{value}</div>{sub && <div className="mt-0.5 text-[11px] text-[var(--text-mute)]">{sub}</div>}</div>;
+  return <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3 sm:p-4"><div className="text-xs text-[var(--text-mute)]">{label}</div><div className={`mt-1 text-xl font-semibold sm:text-2xl ${c} ${mono ? "mono tnum" : ""}`}>{value}</div>{sub && <div className="mt-0.5 text-[11px] text-[var(--text-mute)]">{sub}</div>}</div>;
 }
 function Col({ label, value }: { label: string; value: React.ReactNode }) {
   return <div><div className="text-[11px] text-[var(--text-mute)]">{label}</div><div className="mono mt-0.5 text-sm font-medium text-[var(--text)]">{value}</div></div>;

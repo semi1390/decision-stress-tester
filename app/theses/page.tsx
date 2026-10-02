@@ -23,7 +23,7 @@ export default function ThesesPage() {
   const TABS: [Filter, string][] = [["all", "All"], ["Trade", "Trade"], ["Watch", "Watch"], ["Pass", "Pass"]];
 
   return (
-    <main className="mx-auto max-w-[1080px] px-6 py-8">
+    <main className="mx-auto max-w-[1080px] px-4 py-6 sm:px-6 sm:py-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div><h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">My theses</h1><p className="mt-2 text-sm text-[var(--text-dim)]">Your committed decisions. Stored on this device only.</p></div>
         <Link href="/research" className="inline-flex items-center gap-1.5 rounded-xl bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-text)] transition hover:bg-[var(--accent-hover)]"><span className="text-base leading-none">+</span> New research</Link>
@@ -42,15 +42,21 @@ export default function ThesesPage() {
             {shown.map((t, i) => {
               const d = dir[t.direction];
               return (
-                <div key={t.id} className="group relative flex items-center gap-4 rounded-xl px-3 py-3 transition hover:bg-[var(--surface-2)]">
+                <div key={t.id} className="group relative rounded-xl px-3 py-3 transition hover:bg-[var(--surface-2)]">
                   <Link href={`/theses/${t.id}`} className="absolute inset-0" aria-label={`Open ${t.ticker} thesis`} />
-                  <span className="mono w-4 shrink-0 text-xs text-[var(--text-mute)]">{i + 1}</span>
-                  <span className="mono grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[var(--surface-2)] text-[11px] font-medium text-[var(--text-dim)]">{t.ticker.slice(0, 2)}</span>
-                  <div className="flex w-[112px] shrink-0 items-center gap-1.5"><span className="text-sm font-semibold text-[var(--text)]">{t.ticker}</span><span className={`mono rounded px-1 py-0.5 text-[10px] font-medium ${d.cls}`}>{d.label}</span></div>
-                  <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ${OPT_COLOR[t.decision]}`}><span className={`h-1.5 w-1.5 rounded-full ${OPT_DOT[t.decision]}`} />{t.decision}</span>
-                  <span className="min-w-0 flex-1 truncate text-sm text-[var(--text-dim)]">{t.thesis}</span>
-                  <span className="mono shrink-0 text-xs text-[var(--text-mute)]">{fmtDate(t.createdAt)}</span>
-                  <button onClick={(e) => del(e, t.id)} aria-label="Delete" className="relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-mute)] transition hover:border-red-400/40 hover:text-red-300"><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" /></svg></button>
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <span className="mono hidden w-4 shrink-0 text-xs text-[var(--text-mute)] sm:block">{i + 1}</span>
+                    <span className="mono grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[var(--surface-2)] text-[11px] font-medium text-[var(--text-dim)]">{t.ticker.slice(0, 2)}</span>
+                    <div className="flex shrink-0 items-center gap-1.5 sm:w-[112px]"><span className="text-sm font-semibold text-[var(--text)]">{t.ticker}</span><span className={`mono rounded px-1 py-0.5 text-[10px] font-medium ${d.cls}`}>{d.label}</span></div>
+                    <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ${OPT_COLOR[t.decision]}`}><span className={`h-1.5 w-1.5 rounded-full ${OPT_DOT[t.decision]}`} />{t.decision}</span>
+                    <span className="hidden min-w-0 flex-1 truncate text-sm text-[var(--text-dim)] sm:block">{t.thesis}</span>
+                    <span className="mono hidden shrink-0 text-xs text-[var(--text-mute)] sm:block">{fmtDate(t.createdAt)}</span>
+                    <button onClick={(e) => del(e, t.id)} aria-label="Delete" className="relative z-10 ml-auto grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-mute)] transition hover:border-red-400/40 hover:text-red-300"><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" /></svg></button>
+                  </div>
+                  <div className="mt-1.5 flex items-center justify-between gap-3 pl-12 sm:hidden">
+                    <span className="min-w-0 flex-1 truncate text-xs text-[var(--text-dim)]">{t.thesis}</span>
+                    <span className="mono shrink-0 text-[11px] text-[var(--text-mute)]">{fmtDate(t.createdAt)}</span>
+                  </div>
                 </div>
               );
             })}

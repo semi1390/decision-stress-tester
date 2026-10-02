@@ -56,7 +56,7 @@ export default function ExecutePage() {
   async function copyOrder() { try { await navigator.clipboard.writeText(orderBlock); setCopied(true); setTimeout(() => setCopied(false), 1600); } catch { /* ignore */ } }
 
   return (
-    <main className="mx-auto max-w-[980px] px-6 pb-16 pt-8">
+    <main className="mx-auto max-w-[980px] px-4 pb-16 pt-8 sm:px-6">
       <div className="flex items-center justify-between gap-3">
         <Link href={`/theses/${thesis.id}`} className="inline-flex items-center gap-1.5 text-sm text-[var(--text-dim)] transition hover:text-[var(--text)]"><span aria-hidden>‹</span> Thesis</Link>
         <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/[0.06] px-3 py-1 text-xs font-medium text-amber-200"><svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" /></svg>Simulated / paper</span>
@@ -64,9 +64,9 @@ export default function ExecutePage() {
 
       {/* header card */}
       <div className="animate-in mt-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
           <div className="flex items-center gap-3.5"><span className="mono grid h-11 w-11 place-items-center rounded-xl bg-[var(--surface-2)] text-sm font-medium text-[var(--text-dim)]">{thesis.ticker.slice(0, 2)}</span><div><div className="flex items-center gap-2"><span className="text-lg font-semibold tracking-tight">{thesis.ticker}</span><span className={`inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] font-medium ring-1 ring-inset ${d.cls}`}><span aria-hidden>{d.arrow}</span>{d.label}</span></div><div className="text-xs text-[var(--text-dim)]">{thesis.companyName ?? thesis.ticker}</div></div></div>
-          <div className="ml-auto flex items-center gap-8">
+          <div className="ml-auto flex items-center gap-6 sm:gap-8">
             <div><div className="text-[11px] uppercase tracking-wide text-[var(--text-mute)]">Current price · EOD</div><div className="mono mt-0.5 text-lg text-[var(--text)]">{ticket?.currentPrice ? money(ticket.currentPrice) : "—"}</div></div>
             <div><div className="text-[11px] uppercase tracking-wide text-[var(--text-mute)]">Your decision</div><div className="mt-1 inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold text-emerald-300"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />{thesis.decision}</div></div>
           </div>

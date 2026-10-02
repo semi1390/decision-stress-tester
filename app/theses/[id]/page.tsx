@@ -30,8 +30,8 @@ export default function ThesisDetail() {
   function del() { thesesStore.remove(id); router.push("/theses"); }
 
   return (
-    <main className="mx-auto max-w-[1180px] px-6 pb-16 pt-8">
-      <div className="flex items-center justify-between gap-3">
+    <main className="mx-auto max-w-[1180px] px-4 pb-16 pt-8 sm:px-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <Link href="/theses" className="inline-flex items-center gap-1.5 text-sm text-[var(--text-dim)] transition hover:text-[var(--text)]"><span aria-hidden>‹</span> My theses</Link>
         <div className="flex items-center gap-2">
           <button onClick={del} aria-label="Delete" className="grid h-9 w-9 place-items-center rounded-lg border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text-mute)] transition hover:border-red-400/40 hover:text-red-300"><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" /></svg></button>
@@ -42,9 +42,9 @@ export default function ThesisDetail() {
 
       {/* banner */}
       <div className="animate-in mt-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
           <div className="flex items-center gap-3.5"><span className="mono grid h-11 w-11 place-items-center rounded-xl bg-[var(--surface-2)] text-sm font-medium text-[var(--text-dim)]">{t.ticker.slice(0, 2)}</span><div><div className="flex items-center gap-2"><span className="text-lg font-semibold tracking-tight">{t.ticker}</span><span className={`inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] font-medium ring-1 ring-inset ${d.cls}`}><span aria-hidden>{d.arrow}</span>{d.label}</span></div><div className="text-xs text-[var(--text-dim)]">{t.companyName ?? t.ticker} · saved {dateTime(t.createdAt)}</div></div></div>
-          <div className="ml-auto flex items-center gap-8">
+          <div className="ml-auto flex items-center gap-6 sm:gap-8">
             <div><div className="text-[11px] uppercase tracking-wide text-[var(--text-mute)]">Your decision</div><div className={`mt-1 inline-flex items-center gap-1.5 text-sm font-semibold ${OPT_COLOR[t.decision]}`}><span className={`h-1.5 w-1.5 rounded-full ${OPT_DOT[t.decision]}`} />{t.decision}</div></div>
             {t.aiDecision && <div><div className="text-[11px] uppercase tracking-wide text-[var(--text-mute)]">AI suggested</div><div className={`mt-1 inline-flex items-center gap-1.5 text-sm font-semibold ${OPT_COLOR[t.aiDecision]}`}><span className={`h-1.5 w-1.5 rounded-full ${OPT_DOT[t.aiDecision]}`} />{t.aiDecision}</div></div>}
           </div>

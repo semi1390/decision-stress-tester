@@ -53,7 +53,7 @@ export default function AddPosition({
   const inputCls = "mono mt-1.5 w-full rounded-xl border border-[var(--border)] bg-[var(--surface-2)] px-3.5 py-2.5 text-sm text-[var(--text)] outline-none transition-colors focus:border-[var(--border-2)]";
 
   return (
-    <div className="fixed inset-0 z-[60] grid place-items-center bg-black/60 p-6 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-[60] grid place-items-center bg-black/60 p-4 backdrop-blur-sm sm:p-6" onClick={onClose}>
       <div className="menu-in w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-start justify-between">
           <div>

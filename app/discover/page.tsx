@@ -44,7 +44,7 @@ export default function DiscoverPage() {
   }
 
   return (
-    <main className="mx-auto max-w-[1240px] px-6 py-8">
+    <main className="mx-auto max-w-[1240px] px-4 py-6 sm:px-6 sm:py-8">
       <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">Discover</h1>
       <p className="mt-2 text-sm text-[var(--text-dim)]">Look up one US stock, check its pulse, then open full research.</p>
 

@@ -17,7 +17,7 @@ export default function HistoryPage() {
   useEffect(() => { setItems(thesesStore.list() as unknown as SavedThesis[]); }, []);
 
   return (
-    <main className="mx-auto max-w-[900px] px-6 py-8">
+    <main className="mx-auto max-w-[900px] px-4 py-6 sm:px-6 sm:py-8">
       <h1 className="text-2xl font-semibold tracking-tight text-[var(--text)]">History</h1>
       <p className="mt-2 text-sm text-[var(--text-dim)]">Every decision you committed, newest first. Stored on this device.</p>
 
@@ -25,14 +25,14 @@ export default function HistoryPage() {
         <EmptyState icon={<svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 2M3.05 11a9 9 0 1 1 .5 4M3 4v4h4" /></svg>} title="Nothing to look back on yet" body="Every decision you commit shows up here, newest first." ctaHref="/research" ctaLabel="Start research" />
       ) : (
         <div className="relative mt-8">
-          <div className="absolute bottom-2 left-[92px] top-2 w-px bg-[var(--border)]" aria-hidden />
+          <div className="absolute bottom-2 left-[80px] top-2 w-px bg-[var(--border)] sm:left-[92px]" aria-hidden />
           <div className="space-y-3">
             {items.map((t) => {
               const d = dir[t.direction];
               return (
-                <div key={t.id} className="relative flex items-start gap-6">
-                  <div className="w-[76px] shrink-0 pt-3.5 text-right"><div className="mono text-xs text-[var(--text-dim)]">{dayUpper(t.createdAt)}</div><div className="mono text-[11px] text-[var(--text-mute)]">{time24(t.createdAt)}</div></div>
-                  <span className="absolute left-[88px] top-[18px] h-2.5 w-2.5 rounded-full ring-4 ring-[var(--bg)]" style={{ background: DOT_HEX[t.decision] ?? "#9ba1a9" }} aria-hidden />
+                <div key={t.id} className="relative flex items-start gap-4 sm:gap-6">
+                  <div className="w-[64px] shrink-0 pt-3.5 text-right sm:w-[76px]"><div className="mono text-xs text-[var(--text-dim)]">{dayUpper(t.createdAt)}</div><div className="mono text-[11px] text-[var(--text-mute)]">{time24(t.createdAt)}</div></div>
+                  <span className="absolute left-[76px] top-[18px] h-2.5 w-2.5 rounded-full ring-4 ring-[var(--bg)] sm:left-[88px]" style={{ background: DOT_HEX[t.decision] ?? "#9ba1a9" }} aria-hidden />
                   <Link href={`/theses/${t.id}`} className="group min-w-0 flex-1 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 transition hover:border-[var(--border-2)]">
                     <div className="flex items-center gap-2.5">
                       <span className="mono text-sm font-semibold text-[var(--text)]">{t.ticker}</span>
